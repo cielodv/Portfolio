@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        let employees = [
+            {
+                "emp_id": "123",
+                "name": "Elon Musk",
+                "position": "CEO"
+            },
+            {
+                "emp_id": "456",
+                "name": "Bill Gates",
+                "position": "Supervisor"
+            }
+        ];
+
+        function showEmployees() {
+            let table = document.getElementById("employee-body");
+            table.innerHTML = ""; 
+
+            employees.forEach(emp => {
+                let row = table.insertRow();
+                row.insertCell(0).textContent = emp.emp_id;
+                row.insertCell(1).textContent = emp.name;
+                row.insertCell(2).textContent = emp.position;
+            });
+        }
+
+        function addEmployee() {
+            let empId = document.getElementById("emp_id").value;
+            let empName = document.getElementById("emp_name").value;
+            let empPosition = document.getElementById("emp_position").value;
+
+            if (empId === "" || empName === "" || empPosition === "") {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+           
+            employees.push({
+                "emp_id": empId,
+                "name": empName,
+                "position": empPosition
+            });
+
+           
+            document.getElementById("emp_id").value = "";
+            document.getElementById("emp_name").value = "";
+            document.getElementById("emp_position").value = "";
+
+           
+            showEmployees();
+        }
+    </script>
+</head>
+<body>
+    <h2>EMPLOYEE LIST</h2>
+
+    <div>
+        <h3>Add Employee</h3>
+        <input type="text" id="emp_id" placeholder="Employee ID">
+        <input type="text" id="emp_name" placeholder="Name">
+        <input type="text" id="emp_position" placeholder="Position">
+        <button type="button" onclick="addEmployee()">ADD</button>
+    </div>
+
+    <div>
+        <h3>SHOW EMPLOYEES</h3>
+        <button type="button" onclick="showEmployees()">SHOW EMPLOYEES</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>EMPLOYEE ID</th>
+                    <th>NAME</th>
+                    <th>POSITION</th>
+                </tr>
+            </thead>
+            <tbody id="employee-body">
+               
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
